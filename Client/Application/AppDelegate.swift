@@ -209,6 +209,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIViewControllerRestorati
         // Override point for customization after application launch.
         var shouldPerformAdditionalDelegateHandling = true
 
+        NDScenario.setup() // NimbleDroid lib setup
+
         adjustIntegration?.triggerApplicationDidFinishLaunchingWithOptions(launchOptions)
 
         UNUserNotificationCenter.current().delegate = self
@@ -296,6 +298,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIViewControllerRestorati
         }
 
         UnifiedTelemetry.recordEvent(category: .action, method: .foreground, object: .app)
+
+        NDScenario.coldStartupEnd()
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
