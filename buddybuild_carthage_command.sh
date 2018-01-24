@@ -7,3 +7,6 @@
 
 carthage bootstrap --platform ios
 
+echo "listing build dir in prebuild"
+echo $BUDDYBUILD_PRODUCT_DIR
+ls $BUDDYBUILD_PRODUCT_DIR
