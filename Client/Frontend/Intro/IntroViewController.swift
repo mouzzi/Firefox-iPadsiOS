@@ -11,9 +11,9 @@ struct IntroUX {
     static let Height = 667
     static let MinimumFontScale: CGFloat = 0.5
     static let PagerCenterOffsetFromScrollViewBottom = UIScreen.main.bounds.width <= 320 ? 20 : 30
-    static let StartBrowsingButtonColor = UIColor.Defaults.Blue40
+    static let StartBrowsingButtonColor = UIColor(rgb: 0x45a1ff)
     static let StartBrowsingButtonHeight = 56
-    static let SignInButtonColor = UIColor.Defaults.Blue40
+    static let SignInButtonColor = UIColor(rgb: 0x45a1ff)
     static let SignInButtonHeight = 60
     static let PageControlHeight = 40
     static let SignInButtonWidth = 290
@@ -23,6 +23,16 @@ struct IntroUX {
 
 protocol IntroViewControllerDelegate: class {
     func introViewControllerDidFinish(_ introViewController: IntroViewController, requestToLogin: Bool)
+}
+
+// Adding because V10.x does not include this
+extension UIView {
+    var safeArea: ConstraintBasicAttributesDSL {
+        if #available(iOS 11.0, *) {
+            return self.safeAreaLayoutGuide.snp
+        }
+        return self.snp
+    }
 }
 
 class IntroViewController: UIViewController {
@@ -253,16 +263,16 @@ extension IntroViewController {
 extension IntroViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(dynamicFontChanged), name: .DynamicFontChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(dynamicFontChanged), name: NotificationDynamicFontChanged, object: nil)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: .DynamicFontChanged, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NotificationDynamicFontChanged, object: nil)
     }
 
     func dynamicFontChanged(_ notification: Notification) {
-        guard notification.name == .DynamicFontChanged else { return }
+        guard notification.name == NotificationDynamicFontChanged else { return }
         setupDynamicFonts()
     }
 
