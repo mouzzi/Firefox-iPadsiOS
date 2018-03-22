@@ -39,6 +39,8 @@ extension BrowserViewController: WKNavigationDelegate {
             // remove the open in overlay view if it is present
             removeOpenInView()
         }
+
+        Profiler.begin(bookend: .load_url)
     }
 
     // Recognize an Apple Maps URL. This will trigger the native app. But only if a search query is present. Otherwise
@@ -208,5 +210,7 @@ extension BrowserViewController: WKNavigationDelegate {
         if let tab = tabManager[webView] {
             navigateInTab(tab: tab, to: navigation)
         }
+
+        Profiler.end(bookend: .load_url)
     }
 }
