@@ -163,7 +163,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>SentryDSN</key>
-	<string>$(SENTRY_DSN)</string>
+	<string>https://fc1784450882434d991967422fed17cb:6b7b87e9cbd847e0b56c68d09a5f55ec@sentry-master-branch-test.dev.mozaws.net/2</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 	<key>UTImportedTypeDeclarations</key>
