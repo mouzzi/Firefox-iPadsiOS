@@ -166,7 +166,7 @@ class FindInPageBar: UIView {
         delegate?.findInPage(self, didFindNextWithText: searchText.text ?? "")
     }
 
-    @objc fileprivate func SELdidTextChange(_ sender: UITextField) {
+    @objc fileprivate func didTextChange(_ sender: UITextField) {
         Profiler.begin(bookend: .find_in_page)
         matchCountView.isHidden = searchText.text?.isEmpty ?? true
         delegate?.findInPage(self, didTextChange: searchText.text ?? "")
