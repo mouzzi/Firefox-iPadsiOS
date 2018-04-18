@@ -1,0 +1,13 @@
+[Cache]
+  S3-Bucket = net-mozaws-prod-ffx-ios-buddybuild 
+
+[IgnoreMap]
+  xcconfigs = xcconfigs
+
+[RepositoryMap]
+  telemetry-ios = Telemetry
+  sentry-cocoa = Sentry
+  readability = Readability
+  onepassword-app-extension = OnePasswordExtension
+  ios_sdk = AdjustSDK
+GCDWebServer = GCDWebServers

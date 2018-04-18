@@ -1,11 +1,21 @@
 #!/bin/bash
 
-# This is needed for Leanplum. Our bootstrap.sh is not run on
-# BuddyBuild and the carthage command that BuddyBuild runs is
-# not compatible with Leanplum for some reason. (It seems to
-# have a problem with the --toolchain argument).
+# Extract rome binary
+tar xzf rome.tgz -C ~
 
-carthage bootstrap --platform ios
+mkdir -p ~/.aws
+echo "[default]" > ~/.aws/config
+echo "region = us-west-2" >> ~/.aws/config
+
+# download missing frameworks
+~/rome download --platform iOS
+
+# list what is missing and update/build if needed
+~/rome list --missing --platform ios | awk '{print $1}' | xargs carthage update --platform ios
+
+# upload what is missing
+~/rome list --missing --platform ios | awk '{print $1}' | xargs ~/rome upload --platform ios
+
 
 echo "listing build dir in prebuild"
 echo $BUDDYBUILD_PRODUCT_DIR
